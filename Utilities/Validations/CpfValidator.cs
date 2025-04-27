@@ -17,9 +17,9 @@
             "99999999999"
         };
 
-        public static bool IsCpf(string numero)
+        public static bool IsCpf(string? numero)
         {
-            var cpfTratado = StringConversor.OnlyNumbers(numero);
+            string cpfTratado = StringConversor.OnlyNumbers(numero);
             if (string.IsNullOrEmpty(cpfTratado) || !PossuiTamanhoValido(cpfTratado)) return false;
             if (PossuiDigitosRepetidos(cpfTratado)) return false;
             return PossuiDigitosValidos(cpfTratado);

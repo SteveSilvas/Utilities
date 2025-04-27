@@ -1,48 +1,35 @@
-﻿using Xunit;
-using Utilities.Validations;
+﻿using Utilities.Validations;
 
 namespace TestUtilities.Validations
 {
     public class CpfValidatorTest
     {
         [Fact]
-        public void IsCpf_ValidCpf_ReturnsTrue_WithList()
+        public void IsCpf_NullOrEmptyCpf_ReturnsFalse()
         {
-            // Arrange
-            var cpfsValidos = new List<string>
-            {
-                "12345678909",
-                "42411273800",
-                "123.456.789-09",
-                "424.112.738-00"
-            };
+            string cpfVazio = "";
 
-            // Act & Assert
-            foreach (var cpf in cpfsValidos)
-            {
-                bool resultado = CpfValidator.IsCpf(cpf);
-                Assert.True(resultado, $"CPF '{cpf}' deveria ser válido.");
-            }
+            bool resultadoVazio = CpfValidator.IsCpf(cpfVazio);
+
+            Assert.False(resultadoVazio);
+            Assert.False(CpfValidator.IsCpf(null));
         }
 
         [Fact]
         public void IsCpf_InvalidCpf_ReturnsFalse()
         {
-            // Arrange
             string cpfInvalido1 = "11111111111";
             string cpfInvalido2 = "12345678900";
             string cpfInvalidoComLetra = "1234567890a";
             string cpfMuitoCurto = "1234567890";
             string cpfMuitoLongo = "123456789091";
 
-            // Act
             bool resultado1 = CpfValidator.IsCpf(cpfInvalido1);
             bool resultado2 = CpfValidator.IsCpf(cpfInvalido2);
             bool resultadoComLetra = CpfValidator.IsCpf(cpfInvalidoComLetra);
             bool resultadoCurto = CpfValidator.IsCpf(cpfMuitoCurto);
             bool resultadoLongo = CpfValidator.IsCpf(cpfMuitoLongo);
 
-            // Assert
             Assert.False(resultado1);
             Assert.False(resultado2);
             Assert.False(resultadoComLetra);
@@ -51,16 +38,27 @@ namespace TestUtilities.Validations
         }
 
         [Fact]
-        public void IsCpf_EmptyCpf_ReturnsFalse()
+        public void IsCpf_ValidCpf_ReturnsTrue_WithList()
         {
-            // Arrange
-            string cpfVazio = "";
+            var cpfsValidos = new List<string>
+            {
+                "231.871.340-50",
+                "653.734.390-96",
+                "123.456.789-09",
+                "518.601.860-09",
+                "047.696.370-20",
+                "541.640.260-14",
+                "431.616.560-75",
+                "443.591.880-30",
+                "950.673.970-63",
+                "312.973.260-83"
+            };
 
-            // Act
-            bool resultadoVazio = CpfValidator.IsCpf(cpfVazio);
-
-            // Assert
-            Assert.False(resultadoVazio);
+            foreach (var cpf in cpfsValidos)
+            {
+                bool resultado = CpfValidator.IsCpf(cpf);
+                Assert.True(resultado, $"CPF '{cpf}' deveria ser válido.");
+            }
         }
     }
 }

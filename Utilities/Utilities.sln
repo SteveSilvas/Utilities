@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35931.197 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities", "Utilities.csproj", "{EF7C1CE5-227D-438A-94F8-73F4E1FEDB45}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestUtilities", "..\TestUtilities\TestUtilities.csproj", "{3CA42762-CAFA-45D8-BC30-669487C53FE0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EF7C1CE5-227D-438A-94F8-73F4E1FEDB45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF7C1CE5-227D-438A-94F8-73F4E1FEDB45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF7C1CE5-227D-438A-94F8-73F4E1FEDB45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF7C1CE5-227D-438A-94F8-73F4E1FEDB45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CA42762-CAFA-45D8-BC30-669487C53FE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CA42762-CAFA-45D8-BC30-669487C53FE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CA42762-CAFA-45D8-BC30-669487C53FE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CA42762-CAFA-45D8-BC30-669487C53FE0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B63DD91D-0308-4A53-8A6D-C1E1CBC469DD}
+	EndGlobalSection
+EndGlobal

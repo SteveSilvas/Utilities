@@ -112,7 +112,7 @@
                 if (++m >= _multiplicadores.Count) m = 0;
             }
 
-            var mod = (soma % _modulo);
+            var mod = soma % _modulo;
             var resultado = _complementarDoModulo ? _modulo - mod : mod;
             resultado = _limite && mod >= _valorLimite ? _valorSubstituto : resultado;
 

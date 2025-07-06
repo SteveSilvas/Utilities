@@ -130,5 +130,31 @@ namespace Utilities.Formatters
             return text.Substring(0, maxLength).Trim() + "...";
         }
 
+        /// <summary>
+        /// Remove todas as tags HTML de uma string, deixando apenas o texto puro.
+        /// </summary>
+        /// <param name="text">Texto de entrada que pode conter HTML.</param>
+        /// <returns>
+        /// Uma string limpa sem marcações HTML.
+        /// </returns>
+        public static string SanitizeHtml(string? text)
+        {
+            if (string.IsNullOrWhiteSpace(text))
+                return string.Empty;
+
+            // Decodifica entidades HTML (&lt;div&gt; → <div>)
+            text = System.Net.WebUtility.HtmlDecode(text);
+
+            // Remove <script>...</script> e <style>...</style>
+            text = Regex.Replace(text, @"<script.*?>.*?</script>", string.Empty, RegexOptions.Singleline | RegexOptions.IgnoreCase);
+            text = Regex.Replace(text, @"<style.*?>.*?</style>", string.Empty, RegexOptions.Singleline | RegexOptions.IgnoreCase);
+
+            // Remove todas as outras tags HTML
+            text = Regex.Replace(text, @"<[^>]+>", string.Empty, RegexOptions.Singleline);
+
+            return text.Trim();
+        }
+
+
     }
 }

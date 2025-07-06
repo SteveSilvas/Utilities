@@ -239,4 +239,52 @@ public class StringFormatterTest
         Assert.Equal("This is a...", result);
     }
 
+    [Fact]
+    public void SanitizeHtml_nullOrEmpty_ReturnsEmptyString()
+    {
+        var valuesList = new List<string?> { null, "", "   " };
+
+        foreach (string? item in valuesList)
+        {
+            string result = StringFormatter.SanitizeHtml(item);
+            Assert.Equal(string.Empty, result);
+        }
+    }
+
+    [Fact]
+    public void SanitizeHtml_textWithoutHtml_ReturnsSameText()
+    {
+        string input = "This is plain text";
+        string result = StringFormatter.SanitizeHtml(input);
+        Assert.Equal("This is plain text", result);
+    }
+
+    [Fact]
+    public void SanitizeHtml_textWithHtml_RemovesTags()
+    {
+        var testCases = new Dictionary<string, string>
+        {
+            { "<p>Hello <b>World</b>!</p>", "Hello World!" },
+            { "<div>Test<br/>Line</div>", "TestLine" },
+            { "<script>alert('hack');</script>Safe", "Safe" },
+            { "<style>.class { color:red; }</style>Styled", "Styled" },
+            { "<a href='link'>Click</a> here", "Click here" },
+            { "&lt;div&gt;Encoded&lt;/div&gt;", "Encoded" },
+            { "<!-- Comment -->Visible", "Visible" },
+        };
+
+        foreach (var (input, expected) in testCases)
+        {
+            string result = StringFormatter.SanitizeHtml(input);
+            Assert.Equal(expected, result);
+        }
+    }
+
+    [Fact]
+    public void SanitizeHtml_textWithHtmlEntities_DecodesEntities()
+    {
+        string input = "AT&amp;T &lt;Company&gt;";
+        string result = StringFormatter.SanitizeHtml(input);
+        Assert.Equal("AT&T", result);
+    }
 }

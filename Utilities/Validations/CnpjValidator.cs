@@ -1,7 +1,20 @@
 ﻿namespace Utilities.Validations
 {
+    /// <summary>
+    /// Fornece métodos para validação de CNPJs.
+    /// </summary>
     public static class CnpjValidator
     {
+        /// <summary>
+        /// Identifica se a string é um CNPJ válido.
+        /// </summary>
+        /// <remarks>
+        /// Caso seja enviado null, string.Empty ou quantidade menor de caracteres é retornado false.
+        /// </remarks>
+        /// <param name="cnpj">String com os números do CNPJ (com ou sem pontuação).</param>
+        /// <returns>
+        /// Retorna true para CNPJ válido e false caso não seja CNPJ válido.
+        /// </returns>
         public static bool IsCnpj(string? cnpj)
         {
             if (string.IsNullOrEmpty(cnpj)) return false;

@@ -84,8 +84,8 @@ namespace Utilities.Formatters
         {
             if (string.IsNullOrWhiteSpace(text))
                 return string.Empty;
-
-            return Regex.Replace(text, @"[^a-zA-Z0-9]", "");
+           
+            return new string(text.Where(char.IsLetterOrDigit)?.ToArray());
         }
 
         /// <summary>
@@ -154,7 +154,5 @@ namespace Utilities.Formatters
 
             return text.Trim();
         }
-
-
     }
 }

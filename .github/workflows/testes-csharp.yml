@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - master # Roda o workflow quando houver um push na branch 'master'
-      
+
   pull_request:
     branches:
       - master # Roda o workflow também em pull requests para 'master'
@@ -34,12 +34,14 @@ jobs:
     - name: Restaurar Dependências # Passo para restaurar os pacotes NuGet para todos os projetos na raiz
       # O comando 'dotnet restore' irá procurar por arquivos .csproj na raiz e subdiretórios.
       run: dotnet restore
-
+      working-directory: Utilities
+      
     - name: Construir Solução # Passo para compilar sua biblioteca e projetos de teste
       # O comando 'dotnet build' irá procurar por arquivos .csproj na raiz e subdiretórios.
       # '--configuration Release' compila na configuração de Release.
       # '--no-restore' evita restaurar dependências novamente, pois já foi feito no passo anterior.
       run: dotnet build --configuration Release --no-restore
+      working-directory: Utilities
 
     - name: Rodar Testes # Passo principal: executar os testes
       # O comando 'dotnet test' irá procurar por projetos de teste (.csproj) na raiz e subdiretórios.

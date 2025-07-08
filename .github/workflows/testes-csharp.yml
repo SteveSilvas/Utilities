@@ -18,6 +18,11 @@ jobs:
     steps:
       - name: Checkout do Código
         uses: actions/checkout@v4
+        
+      - name: Set UTF-8 encoding
+        run: |
+          echo "LANG=C.UTF-8" >> $GITHUB_ENV
+          echo "LC_ALL=C.UTF-8" >> $GITHUB_ENV
 
       - name: Setup .NET SDK ${{ matrix.dotnet-version }}
         uses: actions/setup-dotnet@v4

@@ -4,6 +4,7 @@ namespace TestUtilities.Formatters;
 
 public class StringFormatterTest
 {
+    #region CleanString
     [Fact]
     public void CleanString_EmptyOrNullValue_ReturnsEmptyString()
     {
@@ -32,7 +33,6 @@ public class StringFormatterTest
         Assert.Equal(string.Empty, result);
     }
 
-
     [Fact]
     public void CleanString_ValueWithSpaces_ReturnsValueWithoutSpaces()
     {
@@ -42,7 +42,9 @@ public class StringFormatterTest
 
         Assert.Equal("meu texto com espaços", result);
     }
+    #endregion
 
+    #region NormalizeSpaces
     [Fact]
     public void NormalizeSpaces_emptyOrNull_ReturnsEmptyString()
     {
@@ -84,7 +86,9 @@ public class StringFormatterTest
         }
         ;
     }
+    #endregion
 
+    #region ToTitleCase
     [Fact]
     public void ToTitleCase_emptyOrNull_ReturnsEmptyString()
     {
@@ -113,7 +117,9 @@ public class StringFormatterTest
             Assert.Equal(expected, result);
         }
     }
+    #endregion
 
+    #region CapitalizeFirstLetter
     [Fact]
     public void CapitalizeFirstLetter_emptyOrNull_ReturnsEmptyString()
     {
@@ -143,7 +149,9 @@ public class StringFormatterTest
             Assert.Equal(expected, result);
         }
     }
+    #endregion
 
+    #region RemoveSpecialCharacters
     [Fact]
     public void RemoveSpecialCharacters_emptyOrNull_ReturnsEmptyString()
     {
@@ -173,7 +181,9 @@ public class StringFormatterTest
             Assert.Equal(expected, result);
         }
     }
+    #endregion
 
+    #region ReplaceMultiple
     [Fact]
     public void ReplaceMultiple_emptyOrNull_ReturnsEmptyString()
     {
@@ -210,7 +220,9 @@ public class StringFormatterTest
             Assert.Equal(expected, result);
         }
     }
+    #endregion
 
+    #region LimitLength
     [Fact]
     public void LimitLength_emptyOrNull_ReturnsEmptyString()
     {
@@ -238,7 +250,9 @@ public class StringFormatterTest
         string result = StringFormatter.LimitLength(input, 10);
         Assert.Equal("This is a...", result);
     }
+    #endregion
 
+    #region SanitizeHtml
     [Fact]
     public void SanitizeHtml_nullOrEmpty_ReturnsEmptyString()
     {
@@ -287,4 +301,5 @@ public class StringFormatterTest
         string result = StringFormatter.SanitizeHtml(input);
         Assert.Equal("AT&T", result);
     }
+    #endregion
 }

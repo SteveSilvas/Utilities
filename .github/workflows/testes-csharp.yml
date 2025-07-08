@@ -1,0 +1,50 @@
+name: Testes de CI para C# Utilities Library # Nome mais específico para sua biblioteca
+
+on:
+  push:
+    branches:
+      - master # Roda o workflow quando houver um push na branch 'master'
+      
+  pull_request:
+    branches:
+      - master # Roda o workflow também em pull requests para 'master'
+
+jobs:
+  build-and-test: # Nome do job
+    name: Build e Testes (.NET ${{ matrix.dotnet-version }})
+    runs-on: ubuntu-latest # O sistema operacional do runner (máquina virtual Linux)
+
+    strategy:
+      matrix:
+        # Define as versões do .NET SDK que você quer testar.
+        # É uma boa prática testar com as versões que você suporta.
+        # Certifique-se de que estas versões são compatíveis com seus projetos.
+        dotnet-version: ['8.x', '6.0'] # Exemplo: .NET 8 e .NET 6
+
+    steps:
+    - name: Checkout do Código # Passo para clonar seu repositório no runner
+      uses: actions/checkout@v4
+
+    - name: Setup .NET SDK ${{ matrix.dotnet-version }} # Passo para instalar a versão do .NET SDK no runner
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: ${{ matrix.dotnet-version }}
+        # include-prerelease: true # Descomente se precisar de versões preview/RC do .NET
+
+    - name: Restaurar Dependências # Passo para restaurar os pacotes NuGet para todos os projetos na raiz
+      # O comando 'dotnet restore' irá procurar por arquivos .csproj na raiz e subdiretórios.
+      run: dotnet restore
+
+    - name: Construir Solução # Passo para compilar sua biblioteca e projetos de teste
+      # O comando 'dotnet build' irá procurar por arquivos .csproj na raiz e subdiretórios.
+      # '--configuration Release' compila na configuração de Release.
+      # '--no-restore' evita restaurar dependências novamente, pois já foi feito no passo anterior.
+      run: dotnet build --configuration Release --no-restore
+
+    - name: Rodar Testes # Passo principal: executar os testes
+      # O comando 'dotnet test' irá procurar por projetos de teste (.csproj) na raiz e subdiretórios.
+      # '--no-build' evita recompilar o código de teste se ele já foi compilado no passo anterior.
+      # '--verbosity normal' mostra um resumo dos testes.
+      # Se você tiver apenas um projeto de teste, como 'TestUtilities',
+      # e quiser ser mais explícito, poderia usar: dotnet test TestUtilities/TestUtilities.csproj --configuration Release --no-build
+      run: dotnet test --configuration Release --no-build --verbosity normal

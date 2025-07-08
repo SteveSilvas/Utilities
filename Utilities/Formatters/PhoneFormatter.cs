@@ -81,7 +81,7 @@ namespace Utilities.Formatters
         /// string result = PhoneFormatter.RemoveMask("(11) 9 3333-4444"); // "11933334444"
         /// </code>
         /// </example>
-        public static string RemoveMask(string phoneNumber)
+        public static string RemoveMask(string? phoneNumber)
         {
             if (string.IsNullOrWhiteSpace(phoneNumber))
                 return string.Empty;

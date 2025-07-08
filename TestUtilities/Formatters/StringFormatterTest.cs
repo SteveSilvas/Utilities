@@ -1,4 +1,4 @@
-using Utilities.Formatters;
+Ôªøusing Utilities.Formatters;
 
 namespace TestUtilities.Formatters;
 
@@ -36,11 +36,11 @@ public class StringFormatterTest
     [Fact]
     public void CleanString_ValueWithSpaces_ReturnsValueWithoutSpaces()
     {
-        string textWithSpace = "   meu texto com espaÁos     ";
+        string textWithSpace = "   meu texto com espa√ßos     ";
 
         string result = StringFormatter.CleanSpaces(textWithSpace);
 
-        Assert.Equal("meu texto com espaÁos", result);
+        Assert.Equal("meu texto com espa√ßos", result);
     }
     #endregion
 
@@ -74,8 +74,8 @@ public class StringFormatterTest
             {
                 { "alfa    beto", "alfa beto" },
                 { "Para   ra para", "Para ra para" },
-                { "   texto com espaco no comeÁo", "texto com espaco no comeÁo" },
-                { "   entre espaÁos  ", "entre espaÁos" },
+                { "   texto com espaco no come√ßo", "texto com espaco no come√ßo" },
+                { "   entre espa√ßos  ", "entre espa√ßos" },
 
             };
 
@@ -108,7 +108,7 @@ public class StringFormatterTest
     {
         { "hello world", "Hello World" },
         { "tESTE de TEXTO", "Teste De Texto" },
-        { "j· est· certo", "J· Est· Certo" }
+        { "j√° est√° certo", "J√° Est√° Certo" }
     };
 
         foreach (var (input, expected) in testCases)
@@ -140,7 +140,7 @@ public class StringFormatterTest
         { "texto", "Texto" },
         { "TEXTO", "Texto" },
         { "tExTo", "Texto" },
-        { "Èxemplo", "…xemplo" }
+        { "√©xemplo", "√âxemplo" }
     };
 
         foreach (var (input, expected) in testCases)
@@ -171,7 +171,7 @@ public class StringFormatterTest
     {
         { "abc123", "abc123" },
         { "abc-123", "abc123" },
-        { "·ÈÌÛ˙Á!@#", "·ÈÌÛ˙Á" },
+        { "√°√©√≠√≥√∫√ß!@#", "√°√©√≠√≥√∫√ß" },
         { "ABC_def$%^", "ABCdef" }
     };
 

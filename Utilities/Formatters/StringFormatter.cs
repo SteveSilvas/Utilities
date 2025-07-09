@@ -59,6 +59,44 @@ namespace Utilities.Formatters
         }
 
         /// <summary>
+        /// Converte uma string para o formato camelCase com palavras separadas por underline.
+        /// A primeira letra de cada palavra (exceto a primeira palavra, se aplicável) será maiúscula,
+        /// e a string resultante começará com letra minúscula.
+        /// </summary>
+        /// <param name="text">A string de entrada a ser convertida.</param>
+        /// <returns>A string convertida para camelCase com underlines, ou uma string vazia se a entrada for nula, vazia ou consistir apenas em espaços em branco.</returns>
+        public static string ToCamelCase(string? text)
+        {
+            if (string.IsNullOrWhiteSpace(text))
+                return string.Empty;
+
+            string[] words = text.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+            if (words.Length == 0)
+                return string.Empty;
+
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < words.Length; i++)
+            {
+                string currentWord = words[i];
+
+                if (i == 0)
+                {
+                    // A primeira palavra deve começar com letra minúscula
+                    sb.Append(currentWord.ToLowerInvariant());
+                }
+                else
+                {
+                    sb.Append(char.ToUpperInvariant(currentWord[0]));
+                    sb.Append(currentWord.Substring(1).ToLowerInvariant());
+
+                }
+            }
+            return sb.ToString();
+        }
+
+        /// <summary>
         /// Capitaliza apenas a primeira letra da string.
         /// </summary>
         /// <param name="text">Texto de entrada.</param>
@@ -84,7 +122,7 @@ namespace Utilities.Formatters
         {
             if (string.IsNullOrWhiteSpace(text))
                 return string.Empty;
-           
+
             return new string(text.Where(char.IsLetterOrDigit)?.ToArray());
         }
 

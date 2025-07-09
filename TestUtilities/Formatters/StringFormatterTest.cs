@@ -105,15 +105,46 @@ public class StringFormatterTest
     public void ToTitleCase_text_ReturnsTitleCasedText()
     {
         var testCases = new Dictionary<string, string>
-    {
-        { "hello world", "Hello World" },
-        { "tESTE de TEXTO", "Teste De Texto" },
-        { "já está certo", "Já Está Certo" }
-    };
+        {
+            { "hello world", "Hello World" },
+            { "tESTE de TEXTO", "Teste De Texto" },
+            { "já está certo", "Já Está Certo" }
+        };
 
         foreach (var (input, expected) in testCases)
         {
             string result = StringFormatter.ToTitleCase(input);
+            Assert.Equal(expected, result);
+        }
+    }
+    #endregion
+
+    #region ToCamelCase
+    [Fact]
+    public void ToCamelCase_emptyOrNull_ReturnsEmptyString()
+    {
+        var valuesList = new List<string?> { null, "", "   " };
+
+        foreach (string? item in valuesList)
+        {
+            string result = StringFormatter.ToCamelCase(item);
+            Assert.Equal(string.Empty, result);
+        }
+    }
+
+    [Fact]
+    public void ToCamelCase_text_ReturnsCamelCasedText()
+    {
+        var testCases = new Dictionary<string, string>
+        {
+            { "hello world", "helloWorld" },
+            { "tESTE de TEXTO", "testeDeTexto" },
+            { "já está certo", "jáEstáCerto" }
+        };
+
+        foreach (var (input, expected) in testCases)
+        {
+            string result = StringFormatter.ToCamelCase(input);
             Assert.Equal(expected, result);
         }
     }

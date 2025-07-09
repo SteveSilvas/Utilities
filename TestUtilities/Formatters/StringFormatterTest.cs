@@ -150,6 +150,99 @@ public class StringFormatterTest
     }
     #endregion
 
+    #region ToPascalCase
+    [Fact]
+    public void ToPascalCase_emptyOrNull_ReturnsEmptyString()
+    {
+        var valuesList = new List<string?> { null, "", "   " };
+
+        foreach (string? item in valuesList)
+        {
+            string result = StringFormatter.ToPascalCase(item);
+            Assert.Equal(string.Empty, result);
+        }
+    }
+
+    [Fact]
+    public void ToPascalCase_text_ReturnsCamelCasedText()
+    {
+        var testCases = new Dictionary<string, string>
+        {
+            { "hello world", "HelloWorld" },
+            { "tESTE de TEXTO", "TesteDeTexto" },
+            { "já está certo", "JáEstáCerto" }
+        };
+
+        foreach (var (input, expected) in testCases)
+        {
+            string result = StringFormatter.ToPascalCase(input);
+            Assert.Equal(expected, result);
+        }
+    }
+    #endregion
+
+    #region ToSnakeCase
+    [Fact]
+    public void ToSnakeCase_emptyOrNull_ReturnsEmptyString()
+    {
+        var valuesList = new List<string?> { null, "", "   " };
+
+        foreach (string? item in valuesList)
+        {
+            string result = StringFormatter.ToSnakeCase(item);
+            Assert.Equal(string.Empty, result);
+        }
+    }
+
+    [Fact]
+    public void ToSnakeCase_text_ReturnsCamelCasedText()
+    {
+        var testCases = new Dictionary<string, string>
+        {
+            { "hello world", "hello_world" },
+            { "tESTE de TEXTO", "teste_de_texto" },
+            { "já está certo", "já_está_certo" }
+        };
+
+        foreach (var (input, expected) in testCases)
+        {
+            string result = StringFormatter.ToSnakeCase(input);
+            Assert.Equal(expected, result);
+        }
+    }
+    #endregion
+
+    #region ToKebabCase
+    [Fact]
+    public void ToKebabCase_emptyOrNull_ReturnsEmptyString()
+    {
+        var valuesList = new List<string?> { null, "", "   " };
+
+        foreach (string? item in valuesList)
+        {
+            string result = StringFormatter.ToKebabCase(item);
+            Assert.Equal(string.Empty, result);
+        }
+    }
+
+    [Fact]
+    public void ToKebabCase_text_ReturnsCamelCasedText()
+    {
+        var testCases = new Dictionary<string, string>
+        {
+            { "hello world", "hello-world" },
+            { "tESTE de TEXTO", "teste-de-texto" },
+            { "já está certo", "já-está-certo" }
+        };
+
+        foreach (var (input, expected) in testCases)
+        {
+            string result = StringFormatter.ToKebabCase(input);
+            Assert.Equal(expected, result);
+        }
+    }
+    #endregion
+
     #region CapitalizeFirstLetter
     [Fact]
     public void CapitalizeFirstLetter_emptyOrNull_ReturnsEmptyString()

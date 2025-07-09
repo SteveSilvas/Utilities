@@ -59,12 +59,12 @@ namespace Utilities.Formatters
         }
 
         /// <summary>
-        /// Converte uma string para o formato camelCase com palavras separadas por underline.
+        /// Converte uma string para o formato camelCase com palavras juntas.
         /// A primeira letra de cada palavra (exceto a primeira palavra, se aplicável) será maiúscula,
         /// e a string resultante começará com letra minúscula.
         /// </summary>
         /// <param name="text">A string de entrada a ser convertida.</param>
-        /// <returns>A string convertida para camelCase com underlines, ou uma string vazia se a entrada for nula, vazia ou consistir apenas em espaços em branco.</returns>
+        /// <returns>A string convertida para camelCase, ou uma string vazia se a entrada for nula, vazia ou consistir apenas em espaços em branco.</returns>
         public static string ToCamelCase(string? text)
         {
             if (string.IsNullOrWhiteSpace(text))
@@ -92,6 +92,108 @@ namespace Utilities.Formatters
                     sb.Append(currentWord.Substring(1).ToLowerInvariant());
 
                 }
+            }
+            return sb.ToString();
+        }
+
+        /// <summary>
+        /// Converte uma string para o formato PascalCase com palavras juntas iniciando cada palavra com letra maiúsucla.
+        /// A primeira letra de cada palavra será maiúscula,
+        /// e a string resultante começará com letra maiúscula.
+        /// </summary>
+        /// <param name="text">A string de entrada a ser convertida.</param>
+        /// <returns>A string convertida para PascalCase, ou uma string vazia se a entrada for nula, vazia ou consistir apenas em espaços em branco.</returns>
+        public static string ToPascalCase(string? text)
+        {
+            if (string.IsNullOrWhiteSpace(text))
+                return string.Empty;
+
+            string[] words = text.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+            if (words.Length == 0)
+                return string.Empty;
+
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < words.Length; i++)
+            {
+                string currentWord = words[i];
+
+                //if (i == 0)
+                //{
+                //    // A primeira palavra deve começar com letra maiúscula
+                //    sb.Append(currentWord.ToUpperInvariant());
+                //}
+                //else
+                //{
+                sb.Append(char.ToUpperInvariant(currentWord[0]));
+                sb.Append(currentWord.Substring(1).ToLowerInvariant());
+
+                //}
+            }
+            return sb.ToString();
+        }
+
+        /// <summary>
+        /// Converte uma string para o formato SnakeCase com palavras separadas por underline em letras minúsculas.
+        /// </summary>
+        /// <param name="text">A string de entrada a ser convertida.</param>
+        /// <returns>
+        /// A string convertida para SnakeCase, ou uma string vazia se a entrada for nula, vazia ou consistir apenas em espaços em branco.
+        /// </returns>
+        public static string ToSnakeCase(string? text)
+        {
+            if (string.IsNullOrWhiteSpace(text))
+                return string.Empty;
+
+            string[] words = text.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+            if (words.Length == 0)
+                return string.Empty;
+
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < words.Length; i++)
+            {
+                string currentWord = words[i];
+
+                if (i > 0)
+                {
+                    sb.Append("_");
+                }
+                sb.Append(currentWord.ToLowerInvariant());
+            }
+            return sb.ToString();
+        }
+
+        /// <summary>
+        /// Converte uma string para o formato KebabCase com palavras separadas por hífem em letras minúsculas.
+        /// </summary>
+        /// <param name="text">A string de entrada a ser convertida.</param>
+        /// <returns>
+        /// A string convertida para KebabCase, ou uma string vazia se a entrada for nula, vazia ou consistir apenas em espaços em branco.
+        /// </returns>
+        public static string ToKebabCase(string? text)
+        {
+            if (string.IsNullOrWhiteSpace(text))
+                return string.Empty;
+
+            string[] words = text.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+            if (words.Length == 0)
+                return string.Empty;
+
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < words.Length; i++)
+            {
+                string currentWord = words[i];
+
+                if (i > 0)
+                {
+                    sb.Append("-");
+                }
+                sb.Append(currentWord.ToLowerInvariant());
             }
             return sb.ToString();
         }

@@ -22,7 +22,7 @@ namespace Utilities.Validations
         /// </summary>
         /// <param name="email">A string do endereço de e-mail a ser validada.</param>
         /// <returns>
-        /// <c>true</c> se o e-mail for válido de acordo com as regras internas e o padrão de regex;
+        /// <c>true</c> se o e-mail for válido.
         /// caso contrário, <c>false</c>.
         /// </returns>
         /// <remarks>
@@ -38,7 +38,6 @@ namespace Utilities.Validations
         /// <item><description>Rótulos de domínio não começam nem terminam com hífen ('-').</description></item>
         /// <item><description>Rótulos de domínio não excedem 63 caracteres.</description></item>
         /// <item><description>Rótulos de domínio não contêm ".." (dois pontos consecutivos).</description></item>
-        /// <item><description>O e-mail corresponde ao padrão da expressão regular definida.</description></item>
         /// </list>
         /// </remarks>
         public static bool IsValid(string? email)
